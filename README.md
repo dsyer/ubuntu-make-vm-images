@@ -1,6 +1,8 @@
 Scripts to create a VM image using `virt-builder`.
 
-Pre-requisites: `virt-builder` (via `libguestfs-tools`) and Qemu.
+Pre-requisites: `virt-builder` (via `libguestfs-tools`), Qemu and a public key in `~/.ssh/id_rsa.pub`.
+
+Build a VM and run it:
 
 ```
 $ run.sh
@@ -20,7 +22,7 @@ Codename:	bionic
 
 > NOTE: you need a non-loopback address of localhost.
 
-You can login with a hostname if you configure that stuff in `~/.ssh/config`:
+You can login with just a hostname if you configure that stuff in `~/.ssh/config`:
 
 ```
 Host qemu
@@ -30,3 +32,24 @@ Host qemu
 ```
 
 then just `ssh qemu`. This is useful when using the remote extension in VS Code.
+
+## Using Nix
+
+The example configuration installed [Nix](https://nixos.org/nix) on top of the base Ubuntu. So you can use that to control dependencies in the runtime environmemt. E.g.
+
+```
+$ git
+
+Command 'git' not found, but can be installed with:
+
+sudo apt install git
+
+$ nix-shell -p git
+[nix-shell:~]$ git
+usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+...
+```
