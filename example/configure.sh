@@ -20,7 +20,7 @@ sed -i -e 's/.PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd
 
 step 'Install nix'
 curl https://nixos.org/nix/install > /tmp/install
-chmod +w /tmp/install
+chmod +x /tmp/install
 mkdir -p /nix
 chown builder /nix
 chmod 755 /nix
