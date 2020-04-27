@@ -5,7 +5,7 @@ Pre-requisites: `virt-builder` (via `libguestfs-tools`), Qemu and a public key i
 Build a VM and run it:
 
 ```
-$ run.sh
+$ ./run.sh
 ```
 
 Wait for it to finish and start the VM. In another terminal you can SSH in as the user "builder":
@@ -53,3 +53,7 @@ usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
            <command> [<args>]
 ...
 ```
+
+## Docker
+
+You can dockerize the qemu snapshot (see `Dockerfile` included - assumes that you have created a snapshot in the `disk.qcow`). It doesn't start very fast though, and you have to run it `--privileged`.
