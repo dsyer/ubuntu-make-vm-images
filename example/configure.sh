@@ -19,7 +19,7 @@ echo root:root | chpasswd
 sed -i -e 's/.PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
 
 step 'Install nix'
-curl https://nixos.org/nix/install > /tmp/install
+curl -L https://nixos.org/nix/install > /tmp/install
 chmod +x /tmp/install
 mkdir -p /nix
 chown builder /nix

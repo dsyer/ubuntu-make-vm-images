@@ -1,6 +1,6 @@
 Scripts to create a VM image using `virt-builder`.
 
-Pre-requisites: `virt-builder` (via `libguestfs-tools`), Qemu and a public key in `~/.ssh/id_rsa.pub`.
+Pre-requisites: `virt-builder` (via `libguestfs-tools`), Qemu and a public key in `~/.ssh/id_rsa.pub`. You may also need to make the kernel images on the host readable (`sudo chmod +r /boot/vmlinuz*`).
 
 Build a VM and run it:
 
@@ -8,10 +8,12 @@ Build a VM and run it:
 $ ./run.sh
 ```
 
-Wait for it to finish and start the VM. In another terminal you can SSH in as the user "builder":
+Wait for it to finish and start the VM (the console goes blank but you can break into the `qemu` monitor with `CTRL-A C`).
+
+In another terminal you can SSH in as the user "builder".
 
 ```
-$ ssh builder@192.168.2.19 -p 2222
+$ ssh builder@192.168.122.1 -p 2222
 builder@kvm$ lsb_release  -a
 No LSB modules are available.
 Distributor ID:	Ubuntu
@@ -20,13 +22,13 @@ Release:	18.04
 Codename:	bionic
 ```
 
-> NOTE: you need a non-loopback address of localhost.
+> NOTE: you need a non-loopback address of localhost (locate it with `ip addr`).
 
 You can login with just a hostname if you configure that stuff in `~/.ssh/config`:
 
 ```
 Host qemu
-	 HostName 192.168.2.19
+	 HostName 192.168.122.1
 	 Port 2222
 	 User builder
 ```
